@@ -4,14 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playlist Converter</title>
-    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <h1>Spotify ↔ Apple Music Playlist Converter</h1>
-    <form action="/convert" method="post">
-        <label for="playlist-link">Enter Playlist Link:</label>
-        <input type="text" id="playlist-link" name="playlist-link" required>
-        <button type="submit">Convert</button>
+    <h1>Convert Playlist</h1>
+    <form action="/" method="POST">
+        <label for="playlist_url">Enter Playlist URL (Spotify or Apple Music):</label><br>
+        <input type="text" id="playlist_url" name="playlist_url" required><br><br>
+
+        <input type="submit" value="Convert">
     </form>
+
+    {% if result %}
+    <h2>Result:</h2>
+    <p>{{ result }}</p>
+    {% endif %}
 </body>
 </html>
