@@ -8,16 +8,46 @@
 </head>
 <body>
     <h1>Convert Playlist</h1>
-    <form action="/" method="POST">
+    <form id="playlistForm" action="/" method="POST">
         <label for="playlist_url">Enter Playlist URL (Spotify or Apple Music):</label><br>
         <input type="text" id="playlist_url" name="playlist_url" required><br><br>
-
         <input type="submit" value="Convert">
     </form>
+
+    <div id="timerContainer">
+        <p id="timer">Elapsed Time: 0 seconds</p>
+    </div>
 
     {% if result %}
     <h2>Result:</h2>
     <p>{{ result }}</p>
     {% endif %}
+
+    <script>
+        // Timer logic
+        const form = document.getElementById('playlistForm');
+        const timerElement = document.getElementById('timer');
+        let timerInterval;
+        let elapsedTime = 0;
+
+        form.addEventListener('submit', (e) => {
+            elapsedTime = 0;
+            timerElement.textContent = 'Elapsed Time: 0 seconds';
+            clearInterval(timerInterval);
+            
+            // Start timer
+            timerInterval = setInterval(() => {
+                elapsedTime += 1;
+                timerElement.textContent = `Elapsed Time: ${elapsedTime} seconds`;
+            }, 1000);
+        });
+
+        // Stop timer when the result is received
+        window.addEventListener('DOMContentLoaded', () => {
+            if (document.querySelector('p').textContent) {
+                clearInterval(timerInterval);
+            }
+        });
+    </script>
 </body>
 </html>
