@@ -7,18 +7,18 @@ import time
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
+
 load_dotenv()
 
-# Initialize Flask app
+
 app = Flask(__name__)
 
-# Spotify API credentials from environment variables
+
 SPOTIPY_CLIENT_ID = os.getenv('SPOTIPY_CLIENT_ID')
 SPOTIPY_CLIENT_SECRET = os.getenv('SPOTIPY_CLIENT_SECRET')
 SPOTIPY_REDIRECT_URI = os.getenv('SPOTIPY_REDIRECT_URI')
 
-# Set up Spotify authentication
+
 sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id=SPOTIPY_CLIENT_ID,
                                                 client_secret=SPOTIPY_CLIENT_SECRET,
                                                 redirect_uri=SPOTIPY_REDIRECT_URI,
@@ -64,7 +64,7 @@ def search_apple_music(track_name, artist_name):
         return None
     
     if app.config.get("DEBUG"):
-        print(response.content[:500])  # Print only the first 500 bytes in debug mode
+        print(response.content[:500])  
 
     soup = BeautifulSoup(response.content, 'html.parser')
     track_link = soup.find('a', {'class': 'click-action'})
